@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTasks } from './hooks/useTasks';
+import { TaskItemContext } from './context';
 import styles from './app.module.css';
 import { ControlPanel } from './components/ControlPanel';
 import { TaskList } from './components/TaskList';
@@ -25,15 +26,15 @@ export const App = () => {
 				toggleSort={toggleSort}
 				isSorted={isSorted}
 			/>
-			<TaskList
-				tasks={tasks}
-				searchQuery={searchQuery}
-				isSorted={isSorted}
-				isLoading={isLoading}
-				error={error}
-				handleEditTask={handleEditTask}
-				handleDeleteTask={handleDeleteTask}
-			/>
+			<TaskItemContext.Provider value={{ handleEditTask, handleDeleteTask }}>
+				<TaskList
+					tasks={tasks}
+					searchQuery={searchQuery}
+					isSorted={isSorted}
+					isLoading={isLoading}
+					error={error}
+				/>
+			</TaskItemContext.Provider>
 		</div>
 	);
 };

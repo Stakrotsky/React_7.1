@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './TaskItem.module.css';
 import { EditTask } from './EditTask';
+import { TaskItemContext } from '../context';
 
-export const TaskItem = ({ task, handleEditTask, handleDeleteTask }) => {
+export const TaskItem = ({ task }) => {
+	const { handleEditTask, handleDeleteTask } = useContext(TaskItemContext);
 	const [isEditing, setIsEditing] = useState(false);
 
 	const handleSaveEdit = (taskId, newText) => {
