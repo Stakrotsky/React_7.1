@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './ControlPanel.module.css';
+import { TaskItemContext } from '../context';
 
-export const ControlPanel = ({ handleAddTask, setSearchQuery, toggleSort, isSorted }) => {
+export const ControlPanel = () => {
+	const { handleAddTask, setSearchQuery, toggleSort, isSorted } =
+		useContext(TaskItemContext);
+
 	const [inputValue, setInputValue] = useState('');
 
 	const handleInputChange = (e) => {

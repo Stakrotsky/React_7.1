@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './TaskItem.module.css';
+import { TaskItemContext } from '../context';
 
-export const EditTask = ({ task, handleSaveEdit, cancelEdit }) => {
+export const EditTask = () => {
+	const { task, handleSaveEdit, cancelEdit } = useContext(TaskItemContext);
 	const [editText, setEditText] = useState(task.text);
 
 	const handleSave = (e) => {

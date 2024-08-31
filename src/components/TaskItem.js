@@ -17,27 +17,25 @@ export const TaskItem = ({ task }) => {
 	};
 
 	return (
-		<li className={styles['tasks-block-item']}>
-			{isEditing ? (
-				<EditTask
-					task={task}
-					handleSaveEdit={handleSaveEdit}
-					cancelEdit={cancelEdit}
-				/>
-			) : (
-				<div className={styles['task-item-content']}>
-					<span>{task.text}</span>
-					<div className={styles['task-item-buttons']}>
-						<button onClick={() => setIsEditing(true)}>Изменить</button>
-						<button
-							onClick={() => handleDeleteTask(task.id)}
-							className={styles['delete-button']}
-						>
-							Удалить
-						</button>
+		<TaskItemContext.Provider value={{ task, handleSaveEdit, cancelEdit }}>
+			<li className={styles['tasks-block-item']}>
+				{isEditing ? (
+					<EditTask />
+				) : (
+					<div className={styles['task-item-content']}>
+						<span>{task.text}</span>
+						<div className={styles['task-item-buttons']}>
+							<button onClick={() => setIsEditing(true)}>Изменить</button>
+							<button
+								onClick={() => handleDeleteTask(task.id)}
+								className={styles['delete-button']}
+							>
+								Удалить
+							</button>
+						</div>
 					</div>
-				</div>
-			)}
-		</li>
+				)}
+			</li>
+		</TaskItemContext.Provider>
 	);
 };

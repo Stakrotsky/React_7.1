@@ -1,16 +1,12 @@
-import React from 'react';
+import { useContext } from 'react';
 import styles from './TaskList.module.css';
 import { TaskItem } from './TaskItem';
 import { filterTasks, sortTasks } from '../utils/utils';
+import { TaskItemContext } from '../context';
 
-export const TaskList = ({
-	tasks,
-	searchQuery,
-	isSorted,
-	isLoading,
-	handleEditTask,
-	handleDeleteTask,
-}) => {
+export const TaskList = () => {
+	const { tasks, isLoading, searchQuery, isSorted } = useContext(TaskItemContext);
+
 	const filteredTasks = sortTasks(filterTasks(tasks, searchQuery), isSorted);
 
 	return (
@@ -21,12 +17,7 @@ export const TaskList = ({
 			) : (
 				<ul className={styles['tasks-block-list']}>
 					{filteredTasks.map((task) => (
-						<TaskItem
-							key={task.id}
-							task={task}
-							handleEditTask={handleEditTask}
-							handleDeleteTask={handleDeleteTask}
-						/>
+						<TaskItem key={task.id} task={task} />
 					))}
 				</ul>
 			)}
